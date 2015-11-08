@@ -14,7 +14,7 @@ synopsis:           Alternative JSON parser based on Parsec and Aeson
 -- A longer description of the package.
 description:        JSON parser with nice error messages and
                     little more strict syntax (whitespace-wise).
-homepage:           https://github.com/xkollar/aeson-parsec-picky
+homepage:           https://github.com/FPBrno/aeson-parsec-picky
 
 -- The license under which the package is released.
 license:            BSD3
@@ -73,4 +73,4 @@ library
 
 source-repository head
   type:             git
-  location:         https://github.com/xkollar/aeson-parsec-picky
+  location:         https://github.com/FPBrno/aeson-parsec-picky
