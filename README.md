@@ -47,3 +47,19 @@ Parsing to Aeson data types
 
 Aeson library is nice to work with with large ecosystem of useful
 libraries. So why not join them and avoid reinventing the wheel?
+
+Motivation
+----------
+
+Why another JSON parser? Internal (company I work for) tool for
+testing JSON RPC used simple format that re-used JSON parsers.
+It was already re-written few times, and reasons were:
+
+* Bad error messages for people who were writing testing scripts.
+* They were able to do horrible stuff (trailing spaces, ...).
+* Some parsers that used Parsec (and produced helpful error messages)
+  were producing non-aeson data structures and we already use
+  aeson on some places so we had option to be more heterogeneous
+  or make useless conversions.
+
+No parser I was aware of seemed to solve these issues.
