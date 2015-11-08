@@ -10,16 +10,16 @@ Interacting with user
 ---------------------
 
 JSON being nice readable text-based format seems good candidate
-for occasionally created by user. While Aeson provides really
+for occasionally being created by a user. While Aeson provides really
 super-optimized parsers, their error messages are not very helpful.
-Creating larger JSON object by hand can be frustrating when you
-make even small mistake.
+Creating larger JSON object by hand can be frustrating (especially)
+when you make even a small mistake.
 
-While this parses is not optimized for speed, it tries to produce
+While this parser is not optimized for speed, it tries to produce
 nice and helpful error messages. (This library uses Parsec library.)
 
-And next step in helping your user is not allowing him or her to
-learn wrong things just look at the following piece of code (be
+Another way to help your user is not allowing him or her to
+learn wrong habbits. Just look at the following piece of code (be
 warned - there are trailing spaces there):
 
 ~~~ .json
@@ -39,8 +39,8 @@ Composability
 -------------
 
 This library was written with re-usability in mind. Parsers it
-provides does not consume any spaces before of after JSON values
-and therefore they are more easily reusable for your own projects.
+provides do not consume any spaces before of after corresponding
+values and therefore are more easily reusable for your own projects.
 
 Parsing to Aeson data types
 ---------------------------
