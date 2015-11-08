@@ -30,9 +30,9 @@ author:             Matej Kollar
 maintainer:         208115@mail.muni.cz
 
 -- A copyright notice.
--- copyright:
+copyright:          (c) 2015, Matej Kollar
 
-category:           Text
+category:           Text, JSON
 
 build-type:         Simple
 

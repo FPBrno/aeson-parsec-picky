@@ -9,6 +9,9 @@
 --
 -- JSON parser with nice error messages and
 -- little more strict syntax (whitespace-wise).
+--
+-- In most cases you would want to use either 'value' or 'object'
+-- parser.
 module Data.Aeson.Parser.Parsec.Picky
     ( string
     , object
@@ -152,7 +155,7 @@ bool = Bool <$> (true <|> false) <?> "JSON bool (true|false)" where
 null :: Parser Value
 null = P.string "null" *> pure Null
 
--- | Parse any JSON vale but nothing more.
+-- | Parse any JSON value but nothing more.
 value :: Parser Value
 value = object <|> array <|> string <|> number <|> bool <|> null
 -- }}} JSON Values ------------------------------------------------------------
