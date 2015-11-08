@@ -1,11 +1,21 @@
 {-# LANGUAGE NoImplicitPrelude #-}
-
+-- |
+-- Module:       $HEADER$
+-- Description:  Picky JSON parser based on Parsec and Aeson
+-- Copyright:    (c) 2015, Matej Kollar
+-- License:      BSD3
+--
+-- Maintainer:   208115@mail.muni.cz
+--
+-- JSON parser with nice error messages and
+-- little more strict syntax (whitespace-wise).
 module Data.Aeson.Parser.Parsec.Picky
     ( string
     , object
     , array
     , number
     , bool
+    , null
     , value
     ) where
 
@@ -112,30 +122,37 @@ baseNumber = read . concat <$> sequence
 -- }}} Underlaying ------------------------------------------------------------
 
 -- {{{ JSON Values ------------------------------------------------------------
+-- | Parse just JSON string and nothing more.
 string :: Parser Value
 string = String <$> baseString <?> "JSON string"
 
+-- | Parse just JSON object and nothing more.
 object :: Parser Value
 object = Object . HashMap.fromList <$> p <?> "JSON object" where
     p = pickyBetween (char '{') (char '}') $ commaSeparated pair
     pair = (,) <$> (baseString <?> "JSON object key (string)")
         <*> (char ':' *> pickySpaces *> value)
 
+-- | Parse just JSON array and nothing more.
 array :: Parser Value
 array = Array . Vector.fromList <$> p <?> "JSON array" where
     p = pickyBetween (char '[') (char ']') $ commaSeparated value
 
+-- | Parse just JSON number and nothing more.
 number :: Parser Value
 number = Number <$> baseNumber <?> "JSON number"
 
+-- | Parse just JSON bool and nothing more.
 bool :: Parser Value
 bool = Bool <$> (true <|> false) <?> "JSON bool (true|false)" where
     true = P.string "true" *> pure True
     false = P.string "false" *> pure False
 
+-- | Parse just JSON null and nothing more.
 null :: Parser Value
 null = P.string "null" *> pure Null
 
+-- | Parse any JSON vale but nothing more.
 value :: Parser Value
 value = object <|> array <|> string <|> number <|> bool <|> null
 -- }}} JSON Values ------------------------------------------------------------
