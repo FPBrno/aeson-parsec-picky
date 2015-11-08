@@ -1,6 +1,11 @@
 Picky JSON Parser
 =================
 
+JSON parser with nice error messages and little
+more strict syntax (whitespace-wise). Based on
+[Aeson](http://hackage.haskell.org/package/aeson) and
+[Parsec](http://hackage.haskell.org/package/parsec).
+
 Interacting with user
 ---------------------
 
