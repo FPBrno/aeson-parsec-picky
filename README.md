@@ -98,12 +98,12 @@ main = getArgs >>= main'
 Motivation
 ----------
 
-Why another JSON parser? Internal (company I work for) tool for
-testing JSON RPC used simple format that re-used JSON parsers.
-It was already re-written few times, and reasons were:
+Why another JSON parser? Some internal tool for
+JSON RPC testing used simple format that re-used JSON parsers.
+It was already re-written few times and reasons were:
 
 * Bad error messages for people who were writing testing scripts.
-* They were able to do horrible stuff (trailing spaces, ...).
+* Those people were able to do horrible stuff (trailing spaces, ...).
 * Some parsers that used Parsec (and produced helpful error messages)
   were producing non-aeson data structures and we already use
   aeson on some places so we had option to be more heterogeneous
