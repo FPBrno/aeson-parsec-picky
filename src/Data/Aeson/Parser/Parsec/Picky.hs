@@ -13,34 +13,45 @@
 -- In most cases you would want to use either 'value' or 'object'
 -- parser.
 module Data.Aeson.Parser.Parsec.Picky
-    ( string
+    (
+    -- * Parsers
+      string
     , object
     , array
     , number
     , bool
     , null
     , value
+    -- * Convenience functions
+    , eitherDecode
     ) where
 
 import Prelude (Enum(toEnum), Int)
 
+import Control.Arrow (left)
 import Control.Applicative (pure, (<$>), (<|>), (<*), (<*>), (*>))
-import Control.Monad (Monad((>>=)), sequence, void)
+import Control.Monad (Monad((>>=)), return, sequence, void)
 import Data.Bool (Bool(False, True), (&&))
--- import Data.Either (either)
+import Data.Either (Either(Left))
 import Data.Eq (Eq((/=)))
 import Data.Function (flip, ($), (.))
 import Data.List (concat)
+import Data.String (String)
 import Text.Read (read)
+import Text.Show (show)
 
 import qualified Data.HashMap.Strict as HashMap (fromList)
 import Data.Text (Text)
 import qualified Data.Text as Text (pack)
--- import Data.Text.Encoding (decodeUtf8')
 import qualified Data.Vector as Vector (fromList)
 import Data.Scientific (Scientific)
 
 
+import Data.Aeson
+    ( FromJSON
+    , Result(Error, Success)
+    , fromJSON
+    )
 import Data.Aeson.Types
     ( Value
         ( Object
@@ -52,15 +63,19 @@ import Data.Aeson.Types
         )
     )
 import Text.Parsec
-    ( between
+    ( SourceName
+    , between
     , char
     , count
     , digit
+    , eof
     , hexDigit
     , many
     , many1
     , newline
     , option
+    , optional
+    , parse
     , satisfy
     , sepBy
     , try
@@ -105,9 +120,8 @@ baseString = Text.pack <$> p where
     formfeed = char 'f' *> pure '\f'
     nl = char 'n' *> pure '\n'
     cr = char 'r' *> pure '\r'
-    -- TODO: Implement unicode
-    hexUnicode = char 'u' *> count 4 hexDigit >>= decode
-    decode x = pure $ toEnum (read ('0':'x':x) :: Int)
+    hexUnicode = char 'u' *> count 4 hexDigit >>= decodeUtf
+    decodeUtf x = pure $ toEnum (read ('0':'x':x) :: Int)
 
 baseNumber :: Parser Scientific
 baseNumber = read . concat <$> sequence
@@ -159,3 +173,11 @@ null = P.string "null" *> pure Null
 value :: Parser Value
 value = object <|> array <|> string <|> number <|> bool <|> null
 -- }}} JSON Values ------------------------------------------------------------
+
+-- | Convenience function to parse JSON.
+eitherDecode :: FromJSON a => SourceName -> Text -> Either String a
+eitherDecode s i = left show (parse jsonEof s i) >>= f where
+    jsonEof = value <* optional newline <* eof
+    f j = case fromJSON j of
+        Success v -> return v
+        Error e -> Left e
