@@ -6,7 +6,7 @@ name:                aeson-parsec-picky
 -- PVP summary:     +-+------- breaking API changes
 --                  | | +----- non-breaking API additions
 --                  | | | +--- code changes with no API change
-version:            0.1.0.0
+version:            0.1.0.1
 
 -- A short (one-line) description of the package.
 synopsis:           Alternative JSON parser based on Parsec and Aeson
@@ -75,3 +75,8 @@ library
 source-repository head
   type:             git
   location:         https://github.com/FPBrno/aeson-parsec-picky
+
+source-repository this
+  type:             git
+  location:         https://github.com/FPBrno/aeson-parsec-picky
+  tag:              v0.1.0.0
