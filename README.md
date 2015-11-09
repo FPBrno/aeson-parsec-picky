@@ -48,6 +48,53 @@ Parsing to Aeson data types
 Aeson library is nice to work with with large ecosystem of useful
 libraries. So why not join them and avoid reinventing the wheel?
 
+Example Use
+-----------
+
+### Script
+
+~~~ { .haskell }
+{-# LANGUAGE DeriveGeneric #-}
+module Main (main) where
+
+import GHC.Generics
+import System.Environment (getArgs)
+
+import Data.Aeson hiding (eitherDecode)
+import Data.Aeson.Parser.Parsec.Picky (eitherDecode)
+
+import Data.Text.IO as Text (readFile)
+
+data Contact = Contact
+    { name :: String
+    , address :: String
+    } deriving (Generic, Show)
+
+instance FromJSON Contact where
+
+printContacts :: [Contact] -> IO ()
+printContacts = mapM_ print
+
+main' :: [String] -> IO ()
+main' [filename] = Text.readFile filename
+    >>= process . eitherDecode filename
+    where
+    process = either putStrLn printContacts
+main' _ = print "Usage: script [CONTACTS_FILE]"
+
+main :: IO ()
+main = getArgs >>= main'
+~~~
+
+### Input file
+
+~~~ { .json }
+[ { "name": "Alice"
+  , "address": "Kansas"
+  }
+]
+~~~
+
 Motivation
 ----------
 
