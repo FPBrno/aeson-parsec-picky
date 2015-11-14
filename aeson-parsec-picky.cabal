@@ -67,7 +67,7 @@ library
   -- Directories containing source files.
   hs-source-dirs:   src
 
-  ghc-options:      -Wall
+  ghc-options:      -Wall -fwarn-tabs -fwarn-implicit-prelude
 
   -- Base language which the package is written in.
   default-language: Haskell2010
