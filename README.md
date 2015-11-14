@@ -70,7 +70,7 @@ data Contact = Contact
     , address :: String
     } deriving (Generic, Show)
 
-instance FromJSON Contact where
+instance FromJSON Contact
 
 printContacts :: [Contact] -> IO ()
 printContacts = mapM_ print
