@@ -127,7 +127,7 @@ baseNumber :: Parser Scientific
 baseNumber = read . concat <$> sequence
     [ opt $ P.string "-"
     , P.string "0" <|> many1 digit
-    , opt $ (:) <$> char ':' <*> many1 digit
+    , opt $ (:) <$> char '.' <*> many1 digit
     , opt $ concat <$> sequence
         [ P.string "e" <|> P.string "E"
         , opt $ P.string "+" <|> P.string "-"
