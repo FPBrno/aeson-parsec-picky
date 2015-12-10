@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -eu
 
 declare -r project=aeson-parsec-picky
@@ -14,7 +15,7 @@ function main() {
     fi
 
     if ! [ -f "${cabalfile}" ]; then
-        die "Script need to be run in directory where is ${cabalfile}"
+        die "Script needs to be run in directory where is ${cabalfile}"
     fi
 
     declare -r last_version=$( sed -n '/^source-repository this$/,/^$/{s/^\s\+tag:\s*v//p}' "${cabalfile}" )
