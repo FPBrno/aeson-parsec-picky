@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+#
+# How it is supposed to be used:
+#
+# * make changes (and commit)
+# * bump version (change version number) (no commit?) (if so, why not take one parameter with version number?)
+# * run this script
+#
+# This script modify cabal file (tag for "this" source repository).
+# with current "version" value...
 set -eu
 
 declare -r project=aeson-parsec-picky
