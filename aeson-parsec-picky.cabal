@@ -79,4 +79,4 @@ source-repository head
 source-repository this
   type:             git
   location:         https://github.com/FPBrno/aeson-parsec-picky
-  tag:              v0.1.0.0
+  tag:              v0.1.0.1
