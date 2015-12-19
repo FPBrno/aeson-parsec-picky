@@ -22,7 +22,7 @@ Another way to help your user is not allowing him or her to
 learn wrong habbits. Just look at the following piece of code (be
 warned - there are trailing spaces there):
 
-~~~ .json
+~~~ { .json }
 { "name"   :   
    ,   
 
