@@ -86,13 +86,106 @@ main :: IO ()
 main = getArgs >>= main'
 ~~~
 
-### Input file
+### Valid input file examples
+
+Some examples of possible valid formatting.
+
+Compact.
+
+~~~ { .json }
+[{"name":"Alice","address":"Kansas"}]
+~~~
+
+Haskell-ish style.
 
 ~~~ { .json }
 [ { "name": "Alice"
   , "address": "Kansas"
   }
 ]
+~~~
+
+More airy version of previous one.
+
+~~~ { .json }
+[ { "name":    "Alice"
+  , "address": "Kansas"
+  }
+]
+~~~
+
+Handing style.
+
+~~~ { .json }
+[ { "name": "Alice",
+    "address": "Kansas"}]
+~~~
+
+### Invalid input file examples and accompanying error messages
+
+~~~ { .json }
+[ { name: "Alice",
+    "address": "Kansas"}]
+~~~
+
+~~~
+"example.json" (line 1, column 5):
+unexpected "n"
+expecting " ", JSON object key (string), lf new-line or "}"
+~~~
+
+---
+
+~~~ { .json }
+[ { "name"= "Alice",
+    "address": "Kansas"}]
+~~~
+
+~~~
+"example.json" (line 1, column 11):
+unexpected "="
+expecting ":"
+~~~
+
+---
+
+~~~ { .json }
+[ { "name" : "Alice",
+    "address": "Kansas"}]
+~~~
+
+~~~
+"example.json" (line 1, column 11):
+unexpected " "
+expecting ":"
+~~~
+
+---
+
+~~~ { .json }
+[ { "name": "Alice"    ,
+    "address": "Kansas"}]
+~~~
+
+~~~
+"example.json" (line 1, column 25):
+unexpected "\n"
+expecting " " or JSON object key (string)
+~~~
+
+---
+
+In following example spaces were replaced with plus signs.
+
+~~~
+[+{+"name":+"Alice",++++
+++++"address":+"Kansas"}]
+~~~
+
+~~~
+"example.json" (line 1, column 25):
+unexpected "\n"
+expecting " " or JSON object key (string)
 ~~~
 
 Motivation
