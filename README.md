@@ -1,6 +1,11 @@
 Picky JSON Parser
 =================
 
+[![Hackage](https://img.shields.io/hackage/v/aeson-parsec-picky.svg)][Hackage: aeson-parsec-picky]
+[![Hackage Dependencies](https://img.shields.io/hackage-deps/v/aeson-parsec-picky.svg)](http://packdeps.haskellers.com/reverse/aeson-parsec-picky)
+[![Haskell Programming Language](https://img.shields.io/badge/language-Haskell-brightgreen.svg)][Haskell.org]
+[![BSD3 License](https://img.shields.io/badge/license-BSD3-brightgreen.svg)][tl;dr Legal: BSD3]
+
 JSON parser with nice error messages and little
 more strict syntax (whitespace-wise). Based on
 [Aeson](http://hackage.haskell.org/package/aeson) and
@@ -203,3 +208,16 @@ It was already re-written few times and reasons were:
   or make useless conversions.
 
 No parser I was aware of seemed to solve these issues.
+
+[Hackage: aeson-parsec-picky]:
+    https://hackage.haskell.org/package/aeson-parsec-picky
+    "aeson-parsec-picky package on Hackage"
+[Haskell.org]:
+    http://www.haskell.org
+    "The Haskell Programming Language"
+[LICENSE]:
+  https://github.com/FPBrno/aeson-parsec-picky/blob/master/LICENSE
+  "License of aeson-parsec-picky package."
+[tl;dr Legal: BSD3]:
+    https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29
+    "BSD 3-Clause License (Revised)"
